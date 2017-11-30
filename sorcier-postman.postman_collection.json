@@ -1,0 +1,239 @@
+{
+	"info": {
+		"name": "sorcier-postman",
+		"_postman_id": "6e870a18-998e-789c-b4e5-6ec8d29ff42b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://fakerestapi.azurewebsites.net/api/Authors",
+					"protocol": "https",
+					"host": [
+						"fakerestapi",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"Authors"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET second",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "aerobatic",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "aerobatic",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://auth-demo.aerobatic.io/protected-standard/",
+					"protocol": "https",
+					"host": [
+						"auth-demo",
+						"aerobatic",
+						"io"
+					],
+					"path": [
+						"protected-standard",
+						""
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "POST",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var responseJSON;",
+							"",
+							"try { ",
+							"    responseJSON = JSON.parse(responseBody); ",
+							"    tests['response is valid JSON'] = true;",
+							"}",
+							"catch (e) { ",
+							"    responseJSON = {}; ",
+							"    tests['response is valid JSON'] = false;",
+							"}",
+							"",
+							"",
+							"tests['response has post data'] = _.has(responseJSON, 'data');",
+							"tests['response matches the data posted'] = (responseJSON.data && responseJSON.data.length === 256);",
+							"",
+							"tests[\"content-type equals text/plain\"] = responseJSON && responseJSON.headers && (responseJSON.headers[\"content-type\"] === 'text/plain');"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/plain"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "Duis posuere augue vel cursus pharetra. In luctus a ex nec pretium. Praesent neque quam, tincidunt nec leo eget, rutrum vehicula magna.\nMaecenas consequat elementum elit, id semper sem tristique et. Integer pulvinar enim quis consectetur interdum volutpat."
+				},
+				"url": {
+					"raw": "https://fakerestapi.azurewebsites.net/api/CoverPhotos",
+					"protocol": "https",
+					"host": [
+						"fakerestapi",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"CoverPhotos"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var responseJSON;",
+							"",
+							"try { ",
+							"    responseJSON = JSON.parse(responseBody); ",
+							"    tests['response is valid JSON'] = true;",
+							"}",
+							"catch (e) { ",
+							"    responseJSON = {}; ",
+							"    tests['response is valid JSON'] = false;",
+							"}",
+							"",
+							"",
+							"tests['response has PUT data'] = _.has(responseJSON, 'data');",
+							"tests['response matches the data sent in request'] = (responseJSON.data && responseJSON.data.length === 256);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "Donec fermentum, nisi sed cursus eleifend, nulla tortor ultricies tellus, ut vehicula orci arcu ut velit. In volutpat egestas dapibus.\nMorbi condimentum vestibulum sapien. Etiam dignissim diam quis eros lobortis gravida vel lobortis est. Etiam gravida sed."
+				},
+				"url": {
+					"raw": "https://fakerestapi.azurewebsites.net/api/Users/{id}",
+					"protocol": "https",
+					"host": [
+						"fakerestapi",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"Users",
+						"{id}"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "PUT",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var responseJSON;",
+							"",
+							"try { ",
+							"    responseJSON = JSON.parse(responseBody); ",
+							"    tests['response is valid JSON'] = true;",
+							"}",
+							"catch (e) { ",
+							"    responseJSON = {}; ",
+							"    tests['response is valid JSON'] = false;",
+							"}",
+							"",
+							"",
+							"tests['response has PUT data'] = _.has(responseJSON, 'data');",
+							"tests['response matches the data sent in request'] = (responseJSON.data && responseJSON.data.length === 256);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "Etiam mi lacus, cursus vitae felis et, blandit pellentesque neque. Vestibulum eget nisi a tortor commodo dignissim.\nQuisque ipsum ligula, faucibus a felis a, commodo elementum nisl. Mauris vulputate sapien et tincidunt viverra. Donec vitae velit nec metus."
+				},
+				"url": {
+					"raw": "https://fakerestapi.azurewebsites.net/api/Books/{id}",
+					"protocol": "https",
+					"host": [
+						"fakerestapi",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"Books",
+						"{id}"
+					]
+				},
+				"description": "\n\n\n"
+			},
+			"response": []
+		}
+	]
+}
