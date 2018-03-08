@@ -1,0 +1,77 @@
+/////////////////////////////////////////////////////////////////////////////////////////
+class AnimalRun {
+  constructor(name, run) {
+    this.name = name;
+    this.run = run;
+  }
+  // Getter
+  get takeRun() {
+    return this.runing();
+  }
+  // Method
+  runing() {
+    return this.name + this.run;
+  }
+}
+class AnimalJump extends AnimalRun {
+    constructor(name, run, jump) {
+        super(name, run); // (A)
+        this.jump = jump;
+    }
+    toString() {
+        return super.toString() + ' and ' + this.jump; // (B)
+    }
+}
+
+const myan = new AnimalJump('my lion ' , ' is runing', jumping);
+
+console.log(myan.toString())//00
+//////////////////////////////////////////////////////////////////////////////////////////
+class human {
+    constructor(name) {
+        this.name = name;
+    }
+    toString() {
+        return  this.name ;
+    }
+}
+
+class speakLanguage extends human {
+    constructor(name, language) {
+        super(name); // (A)
+        this.language = language;
+    }
+    toString() {
+        return super.toString() + ' speaks ' + this.language; // (B)
+    }
+}
+let cp = new speakLanguage('amadu', 'french');
+console.log(cp.toString());
+//////////////////////////////////////////////////////////////////////////////////////////
+function FuncAnimal(name) {
+  this.name = name;
+  var className = 'FuncAnimal'; // private variable
+  
+  return {
+    name: name,
+    run: function() {
+      console.log(className+': '+this.name+' - run');
+    }
+  }
+}
+var beast1 = new FuncAnimal('Beast1');
+beast1.run();
+console.log('Privite fields are not accessible: className = '+beast1.className);
+
+function ProtoAnimal(name) {
+  this.name = name;
+  this._className = 'FuncAnimal';  // '_' means field is 'privite', but this field is still accessible
+}
+
+ProtoAnimal.prototype.run = function() {
+  console.log(this._className+': '+this.name+' - run');
+}; 
+
+var beast2 = new ProtoAnimal('Beast2');
+beast2.run();
+console.log('Privite fields are accessible: _className = '+beast2._className);
