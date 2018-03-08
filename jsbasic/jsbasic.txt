@@ -70,13 +70,13 @@ function deepCompare(obj1, obj2) {
 console.log(deepCompare(a, b));  //truea
 console.log(deepCompare(a, c));  //true 
 console.log(deepCompare(a, d));  //false
-/* console.log(deepCompare({ one: 1, two: ‘2’ }, { one: 1, two:
-‘2’ })); */
+/* console.log(deepCompare({ one: 1, two: â€˜2â€™ }, { one: 1, two:
+â€˜2â€™ })); */
 //////////////////////////////////////////////////////////////////
 function replaceQuotes(string){
  	return string.replace(/'/g, '"');
   }
-console.log(replaceQuotes("I’m the ‘hero’"));
+console.log(replaceQuotes("Iâ€™m the â€˜heroâ€™"));
 //chess
 function chessBoard(rows, columns){
 	var arr = [];
