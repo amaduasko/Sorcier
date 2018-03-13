@@ -1,0 +1,145 @@
+const human = { name: 'John' };
+function Programmer(language) {
+    this.language = language;
+}
+Programmer.prototype = human;
+
+console.log('\n1.\n')
+const proger = new Programmer('JavaScript');
+console.log(proger.__proto__ === human);
+console.log(proger);
+console.log(proger.__proto__);
+
+console.log("\n2. Has own property return true only then object has property\n")
+for(key in proger) {
+  console.log(`proger[${key}]=${proger[key]} is own property: ${proger.hasOwnProperty(key)}`);
+}
+
+console.log("\n3. Can't delete property from object, because object doesn't have that property - __proto__ has\n")
+console.log(proger.name);
+delete proger.name
+console.log(proger.name);
+
+console.log("\n4. Property changes will affect only object\n")
+proger.name='Jack';
+console.log(proger);
+console.log(proger.__proto__);
+
+
+console.log("\n5. Can delete only property that object has\n")
+console.log(proger.language);
+delete proger.language
+console.log(proger.language);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const human={
+  name: 'John'
+};
+
+function Programmer(language) {
+    this.language = language;
+}
+
+console.log(Programmer.prototype)
+console.log(Programmer.prototype.constructor)
+console.log(Programmer.prototype.constructor === Programmer)
+Programmer.prototype = human;
+console.log(Programmer.prototype)
+console.log(Programmer.prototype.constructor)
+console.log(Programmer.prototype.constructor === Programmer)
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+class Animal {
+  constructor(name) {
+    this.name = name;
+  }
+
+  run() {
+    console.log(`Animal: ${this.name} - run`);
+  }
+}
+
+class Rabbit {
+  constructor() {
+    Animal.apply(this, arguments);
+  }
+
+  run() {
+    console.log(`Rabbit: ${this.name} - run`);
+  }
+}
+
+Rabbit.prototype = Animal.prototype;
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function FuncAnimal(name) {
+  this.name = name;
+  const className = 'FuncAnimal'; // private variable
+  
+  return {
+    name,
+    run() {
+      console.log(`${className}: ${this.name} - run`);
+    }
+  }
+}
+const beast1 = new FuncAnimal('Beast1');
+beast1.run();
+console.log(`Privite fields are not accessible: className = ${beast1.className}`);
+
+class ProtoAnimal {
+  constructor(name) {
+    this.name = name;
+    this._className = 'FuncAnimal';  // '_' means field is 'privite', but this field is still accessible
+  }
+
+  run() {
+    console.log(`${this._className}: ${this.name} - run`);
+  }
+}
+
+const beast2 = new ProtoAnimal('Beast2');
+beast2.run();
+console.log(`Privite fields are accessible: _className = ${beast2._className}`);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 1. Constructor Animal
+class Animal {
+  constructor(name) {
+    this.name = name;
+    this.speed = 0;
+  }
+
+  // 1.1. Methods into prototype
+
+  stop() {
+    this.speed = 0;
+    console.log( `${this.name} is not moving` );
+  }
+
+  run(speed) {
+    this.speed += speed;
+    console.log( `${this.name} is running, speed ${this.speed}` );
+  }
+}
+
+// 2. Constructor Rabbit
+class Rabbit {
+  constructor(name) {
+    this.name = name;
+    this.speed = 0;
+  }
+
+  // 2.2. Rabbit methods
+  jump() {
+    this.speed++;
+    console.log( `${this.name} is jumping, speed ${this.speed}` );
+  }
+
+  // 2.3. Rabbit overload method
+  run() {
+    console.log('Overloaded method');
+    Animal.prototype.run.apply(this, arguments);
+  }
+}
+
+// 2.1. Inheritance
+Rabbit.prototype = Object.create(Animal.prototype);
+Rabbit.prototype.constructor = Rabbit;
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
